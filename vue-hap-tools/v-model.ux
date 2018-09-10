@@ -1,0 +1,45 @@
+
+<template>
+  <input type="text" :value="age" @change="_qa_model_age({n: 'age'})">
+  <div for="(i, visitor) in visitors">
+    <div for="(j, user) in visitor.users ">
+      <input type="text" :value="user.name" @change="_qa_model_user_name({info: 'v-for信息'})">
+    </div>
+  </div>
+</template>
+<script>
+import Vue from 'vue-core'
+
+const _qa_vue_options = {
+  data () {
+    return {
+      age: 20,
+      visitors: [
+        {
+          company: 'sina',
+          users: [{ name: 'bob' }]
+        }
+      ]
+    }
+  }
+}
+let _qa_vue = null
+export default {
+  data () {
+    _qa_vue = new Vue(_qa_vue_options)
+    const vmData = getVmData(_qa_vue)
+    bindWatch(this, _qa_vue, vmData)
+    return clone(vmData)
+  },
+  onInit () {
+    _qa_vue.$mount()
+  },
+  _qa_model_age (info, e) {
+    _qa_vue[info.n = e.target.value
+  },
+  _qa_model_user_name (info, e) {
+    // 实际需要这样
+    _qa_vue['visitors'][i]['users'][j]['name'] = e.target.value
+  }
+}
+</script>

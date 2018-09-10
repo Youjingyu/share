@@ -1,0 +1,41 @@
+
+<template>
+  <div class="child" onclick="toggle">
+    age:{{age}}
+  </div>
+</template>
+<script>
+import Vue from 'vue-core'
+
+const _vue_options = {
+  data () {
+    return {
+      age: 20
+    }
+  },
+  methods: {
+    toggle () {
+      this.$emit('toggle')
+    }
+  }
+}
+
+export default {
+  props: ['username'],
+  data () {
+    mergeProps(_qa_vue_options)
+    _qa_vue = new Vue(_qa_vue_options)
+    _qa_vue.$emit = this.$emit
+    _qa_vue.$on = this.$on
+    const vmData = getVmData(_qa_vue)
+    bindWatch(this, _qa_vue, vmData)
+    return clone(vmData)
+  },
+  onInit () {
+    _qa_vue.$mount()
+    this.$watch('username', (newVal) => {
+      _qa_vue['username'] = newVal
+    })
+  },
+}
+</script>

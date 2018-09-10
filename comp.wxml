@@ -1,0 +1,24 @@
+<!-- 页面 -->
+<import src="card$685f4122" />
+<template>
+  <div>
+    <template data="{{...$root[$kk+'0'], $root}}" is="card$685f4122"></template>
+  </div>
+</template>
+
+<!-- template -->
+<!-- 可以直接用template中data注入的数据，需要做任何转换 -->
+<template name="card$685f4122">
+  <div>
+    <input type="text" v-model="msg">
+    <span>name: {{username}}</span>
+  </div>
+</template>
+
+<!-- 如果没有类似机制 -->
+<template name="card$685f4122">
+  <div>
+    <input type="text" v-model="$root['0,1'].msg">
+    <span>name: {{$root['0,1'].username}}</span>
+  </div>
+</template>

@@ -1,0 +1,10 @@
+<template>
+  <div class="container" :class="{active: isActive, 'text-danger': age === 20 }">
+  </div>
+  <div class="container" :class="[active, age === 20 ? 'text-danger': '']">
+  </div>
+
+  <div class="container {{isActive ? 'active' : ''}} {{ age === 20 ? 'text-danger': ''}}">
+  </div>
+  <div class="container {{active}} {{age === 20 ? 'text-danger': ''}}"></div>
+</template>

@@ -1,0 +1,55 @@
+
+<import src="./comp" name="comp"></import>
+<template>
+  <div>
+    <comp1></comp1>
+    <div onclick="_qa_proxy(para1, $event, {n:'togglge'})"></div>
+  </div>
+</template>
+<script>
+import Vue from 'vue-core'
+
+const _qa_vue_options = {
+  data () {
+    return {
+      name: 'bob'
+    }
+  },
+  mounted () {},
+  watch: {
+    name () {}
+  },
+  computed: {
+    age () {
+      return 20
+    }
+  },
+  methods: {
+    togglge () {}
+  }
+}
+
+let _qa_vue = null
+export default {
+  data () {
+    _qa_vue = new Vue(_qa_vue_options)
+    const vmData = getVmData(_qa_vue)
+    bindWatch(this, _qa_vue, vmData)
+    return clone(vmData)
+  },
+  onInit () {
+    _qa_vue.$mount()
+  },
+  _qa_proxy () {
+    // 获取到事件回调函数名字: cbName
+    _qa_vue[cbName].aplly(_qa_vue, arguments)
+  }
+}
+
+function  bindWatch (qaVm, vm, vmData) {
+  // 示例
+  vm.watch('user.name', (newVal) => {
+    qaVm['user']['name'] = newVal
+  })
+}
+</script>

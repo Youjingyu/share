@@ -1,0 +1,29 @@
+<template>
+  <div class="demo-page">
+    <text class="title">欢迎打开{{key}}</text>
+  </div>
+</template>
+
+<script>
+import router from '@system.router'
+export default {
+  data () {
+    return {
+      title: '示例页面'
+    }
+  },
+  routeDetail () {
+    router.push({
+      uri: '/DemoDetail'
+    })
+  }
+}
+</script>
+
+<style>
+  .demo-page {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+</style>

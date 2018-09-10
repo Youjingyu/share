@@ -1,0 +1,28 @@
+<import src="./comp" name="comp"></import>
+<template>
+  <div>
+    <comp1></comp1>
+    <div onclick="togglge"></div>
+  </div>
+</template>
+<script>
+
+export default {
+  data () {
+    return {
+      name: 'bob'
+    }
+  },
+  created () {
+    Object.defineProperty(this, 'age', {
+      get: function () {
+        return 20
+      }
+    })
+    this.$watch('name', '_qa_watch_name')
+  },
+  onReady () {},
+  togglge () {},
+  _qa_watch_name () {}
+}
+</script>

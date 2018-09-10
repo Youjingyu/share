@@ -1,0 +1,46 @@
+
+<template>
+  <input type="text" :value="age" @change="_qa_proxy({id: 0})">
+    <div onclick="_qa_proxy({id: 1}"></div>
+  <div for="(i, visitor) in visitors">
+    <div for="(j, user) in visitor.users ">
+      <input type="text" :value="user.name" @change="_qa_proxy({id: j + '-' + 2})">
+    </div>
+  </div>
+</template>
+<script>
+import Vue from 'vue-core'
+
+const _qa_vue_options = {
+  render: function () {},
+  staticRenderFns: [],
+  data () {
+    return {
+      age: 20,
+      visitors: [
+        {
+          company: 'sina',
+          users: [{ name: 'bob' }]
+        }
+      ]
+    }
+  }
+}
+let _qa_vue = null
+export default {
+  data () {
+    _qa_vue = new Vue(_qa_vue_options)
+    const vmData = getVmData(_qa_vue)
+    bindWatch(this, _qa_vue, vmData)
+    return clone(vmData)
+  },
+  onInit () {
+    _qa_vue.$mount()
+  },
+  _qa_proxy (info, e) {
+    const { id } = info
+    const handler = getHanler(_qa_vue, id)
+    handler(e)
+  }
+}
+</script>

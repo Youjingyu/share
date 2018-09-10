@@ -1,0 +1,9 @@
+<import src="card$685f4122" />
+<template name="index$5030d6e0">
+  <view class="_div data-v-48cbe20c container {{[visibility ? 'toggle-active' : '']}}" bindtap="handleProxy"
+    data-eventid="{{'1'}}" data-comkey="{{$k}}"><template data="{{...$root[$kk+'0'], $root}}" is="card$685f4122"></template>
+    <view wx:key="i" key="{{i}}" wx:for="{{arr}}" wx:for-index="i" wx:for-item="item" class="_div data-v-48cbe20c"><input
+        type="text" value="{{arr.name}}" bindinput="handleProxy" data-eventid="{{'0-'+i}}" data-comkey="{{$k}}" class="_input data-v-48cbe20c" /></view>
+    <navigator url="/pages/counter/main" class="_a data-v-48cbe20c">去往Vuex示例页面</navigator>
+  </view>
+</template>

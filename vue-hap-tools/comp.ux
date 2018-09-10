@@ -1,0 +1,41 @@
+
+<import src="./comp" name="comp"></import>
+<template>
+  <div>
+    <comp1 ontoggle="childToggle" username="{{bob}}"></comp1>
+  </div>
+</template>
+<script>
+import Vue from 'vue-core'
+
+const _qa_vue_options = {
+  data () {
+    return {
+      name: 'bob'
+    }
+  },
+  methods: {
+    childToggle () {
+    }
+  }
+}
+let _qa_vue = null
+export default {
+  data () {
+    _qa_vue = new Vue(_qa_vue_options)
+    _qa_vue.$emit = this.$emit
+    _qa_vue.$on = this.$on
+    const vmData = getVmData(_qa_vue)
+    bindWatch(this, _qa_vue, vmData)
+    return clone(vmData)
+  },
+  onInit () {
+    _qa_vue.$mount()
+  },
+  // 这里有个坑，自定义组件的事件不能走_qa_proxy代理
+  // 因为不能_qa_proxy({n: childToggle})这样传参，所有我拿不到事件回调的名字
+  childToggle () {
+    _qa_vue.childToggle.call(arguments)
+  }
+}
+</script>
